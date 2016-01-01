@@ -711,7 +711,7 @@ class Tax_Meta_Class {
     $value['id'] = '';
     $value['url'] = isset($value['src'])? $value['src']: $value['url'];
     $has_image    = empty($value['url'])? false : true;
-    $w            = isset($field['width'])? $field['width'] : 'auto';
+    $w            = isset($field['width'])? $field['width'] : '100%';
     $h            = isset($field['height'])? $field['height'] : 'auto';
     $PreviewStyle = "style='width: $w; height: $h;". ( (!$has_image)? "display: none;'": "'");
     $id           = $field['id'];
