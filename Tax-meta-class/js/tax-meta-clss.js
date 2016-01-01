@@ -153,9 +153,7 @@ jQuery(document).ready(function($) {
     $this.timepicker( { showSecond: true, timeFormat: format } );
     
   });
-
-  $('.at-color').wpColorPicker();
-
+  $('.at-color').length && $('.at-color').wpColorPicker();
   /**
    * Helper Function
    *
