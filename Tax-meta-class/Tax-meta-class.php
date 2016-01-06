@@ -1667,13 +1667,18 @@ class Tax_Meta_Class {
   
   //get term meta field
   public function get_tax_meta($term_id,$key,$multi = false){
-    $t_id = (is_object($term_id))? $term_id->term_id: $term_id;
-    $m = get_option( 'tax_meta_'.$t_id);  
-    if (isset($m[$key])){
-      return $m[$key];
-    }else{
-      return '';
-    }
+	$t_id = (is_object($term_id))? $term_id->term_id: $term_id;
+	// Fixs empty result on Wordpress 4.4
+	if(function_exists('get_term_meta')){
+	   return get_term_meta($term_id,$key,$multi); 
+	}else{		    
+	   $m = get_option( 'tax_meta_'.$t_id);  
+	   if (isset($m[$key])){
+		return $m[$key];
+	   }else{
+		return '';
+	   }
+	}
   }
   
   //delete meta
@@ -1769,11 +1774,16 @@ endif; // End Check Class Exists
 if (!function_exists('get_tax_meta')){
 	function get_tax_meta($term_id,$key,$multi = false){
 		$t_id = (is_object($term_id))? $term_id->term_id: $term_id;
-		$m = get_option( 'tax_meta_'.$t_id);  
-		if (isset($m[$key])){
-			return $m[$key];
-		}else{
-			return '';
+		// Fixs empty result on Wordpress 4.4
+		if(function_exists('get_term_meta')){
+			return get_term_meta($term_id,$key,$multi); 
+		}else{		
+			$m = get_option( 'tax_meta_'.$t_id);  
+			if (isset($m[$key])){
+				return $m[$key];
+			}else{
+				return '';
+			}
 		}
 	}
 }
